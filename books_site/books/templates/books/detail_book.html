@@ -1,0 +1,27 @@
+<p>Книга <a href="/book/{{ book.id }}/edit">✏️</a> <a href="/book/{{ book.id }}/delete">❌</a></p>
+<li>ID{{ book.id }}</li>
+<li>Название: {{ book.name }}</li>
+
+<br>
+<p>Комментарии к книге:</p>
+{% if comments %}
+<ul>
+    {% for comment in comments %}
+    <li>{{ comment.author.full_name }}: {{comment.text}}
+        <a href="/book/{{book.id}}/comment/{{comment.id}}/delete">❌</a>
+        <a href="/book/{{ book.id }}/comment/{{comment.id}}/edit">✏️</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>Комментариев нет.</p>
+{% endif %}
+<br>
+<form action="comment" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Отправить">
+</form>
+
+
+<p><a href="/books">Назад</a></p>

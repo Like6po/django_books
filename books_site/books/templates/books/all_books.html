@@ -1,0 +1,14 @@
+{% if books_list %}
+<p1>
+    Список книг:
+</p1>
+<ul>
+    {% for book in books_list %}
+    <li><a href="/book/{{ book.id }}/">{{ book.name }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>Книг нет.</p>
+{% endif %}
+
+<p><a href="/">На главную</a></p>
