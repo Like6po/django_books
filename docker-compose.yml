@@ -1,0 +1,24 @@
+version: '3.3'
+
+services:
+  postgres:
+    image: postgres:14.3
+    container_name: postgres
+    expose:
+      - 5432
+    env_file:
+      - ".env"
+
+  django:
+    container_name: django
+    build: ./books_site
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    restart: always
+    volumes:
+      - ./books_site:/books_site
+    env_file:
+      - ".env"
+    depends_on:
+      - postgres
